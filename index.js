@@ -23,7 +23,7 @@ return function deepmerge(target, src, options) {
             if (typeof dst[i] === 'undefined' && !options.alwaysPush) {
                 dst[i] = e;
             } else if (typeof e === 'object' && !options.alwaysPush) {
-                dst[i] = deepmerge(target[i], e);
+                dst[i] = deepmerge(target[i], e, options);
             } else {
                 if (target.indexOf(e) === -1) {
                     dst.push(e);
@@ -44,7 +44,7 @@ return function deepmerge(target, src, options) {
                 if (!target[key]) {
                     dst[key] = src[key];
                 } else {
-                    dst[key] = deepmerge(target[key], src[key]);
+                    dst[key] = deepmerge(target[key], src[key], options);
                 }
             }
         });
