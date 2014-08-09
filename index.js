@@ -14,9 +14,6 @@ return function deepmerge(target, src, options) {
     var dst = array && [] || {};
 
     if (array) {
-        console.log('Target:',target);
-        console.log('Source:',src);
-        console.log('DST:',src);
         target = target || [];
         dst = dst.concat(target);
         src.forEach(function(e, i) {
