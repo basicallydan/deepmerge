@@ -8,17 +8,21 @@
     }
 }(this, function () {
 
-return function deepmerge(target, src) {
+return function deepmerge(target, src, options) {
+    options = options || { alwaysPush : false };
     var array = Array.isArray(src);
     var dst = array && [] || {};
 
     if (array) {
+        console.log('Target:',target);
+        console.log('Source:',src);
+        console.log('DST:',src);
         target = target || [];
         dst = dst.concat(target);
         src.forEach(function(e, i) {
-            if (typeof dst[i] === 'undefined') {
+            if (typeof dst[i] === 'undefined' && !options.alwaysPush) {
                 dst[i] = e;
-            } else if (typeof e === 'object') {
+            } else if (typeof e === 'object' && !options.alwaysPush) {
                 dst[i] = deepmerge(target[i], e);
             } else {
                 if (target.indexOf(e) === -1) {

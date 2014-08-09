@@ -220,3 +220,23 @@ test('should work on arrays of nested objects', function(t) {
     t.deepEqual(merge(target, src), expected)
     t.end()
 })
+
+test('should always push onto arrays if specified', function(t) {
+    var target = [
+        { key1: { subkey: 'one' }}
+    ]
+
+    var src = [
+        { key1: { subkey: 'two' }},
+        { key2: { subkey: 'three' }}
+    ]
+
+    var expected = [
+        { key1: { subkey: 'one' }},
+        { key1: { subkey: 'two' }},
+        { key2: { subkey: 'three' }}
+    ]
+
+    t.deepEqual(merge(target, src, { alwaysPush : true }), expected)
+    t.end()
+})
