@@ -240,3 +240,27 @@ test('should always push onto arrays if specified', function(t) {
     t.deepEqual(merge(target, src, { alwaysPush : true }), expected)
     t.end()
 })
+
+test('should modify specific array items if numerical keys specified despite force push', function(t) {
+    var target = [
+        { key1: { subkey: 'one' }},
+        { key1: { subkey: 'two' }},
+        { key1: { subkey: 'three' }},
+        { key1: { subkey: 'four' }}
+    ]
+
+    var src = {
+        0 : { key1 : { subkey: 'three'} },
+        3 : { key1 : { subkey: 'five'} }
+    }
+
+    var expected = [
+        { key1: { subkey: 'three' }},
+        { key1: { subkey: 'two' }},
+        { key1: { subkey: 'three' }},
+        { key1: { subkey: 'five' }},
+    ]
+
+    t.deepEqual(merge(target, src, { alwaysPush : true }), expected)
+    t.end()
+})
