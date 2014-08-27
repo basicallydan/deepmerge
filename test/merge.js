@@ -261,6 +261,9 @@ test('should modify specific array items if numerical keys specified despite for
         { key1: { subkey: 'five' }},
     ]
 
-    t.deepEqual(merge(target, src, { alwaysPush : true }), expected)
+    var result = merge(target, src, { alwaysPush : true })
+
+    t.deepEqual(result, expected)
+    t.ok(Array.isArray(result), 'Result is not an array')
     t.end()
 })

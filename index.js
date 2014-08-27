@@ -10,10 +10,11 @@
 
 return function deepmerge(target, src, options) {
     options = options || { alwaysPush : false };
-    var array = Array.isArray(src);
-    var dst = array && [] || {};
+    var srcIsArray = Array.isArray(src);
+    var targetIsArray = Array.isArray(target);
+    var dst = (srcIsArray || targetIsArray) && [] || {};
 
-    if (array) {
+    if (srcIsArray) {
         target = target || [];
         dst = dst.concat(target);
         src.forEach(function(e, i) {
